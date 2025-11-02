@@ -1,0 +1,37 @@
+/* app/globals.css */
+@import "tailwindcss";
+@reference "tailwindcss";
+
+/* анимация появления секций */
+/* Добавьте эти стили */
+.reveal {
+  opacity: 1 !important;
+  visibility: visible !important;
+}
+
+section {
+  display: block;
+  width: 100%;
+}
+
+/* стеклянная карточка */
+.card-glass{
+  @apply backdrop-blur border rounded-2xl;
+  @apply bg-[rgba(255,255,255,0.08)] border-[rgba(255,255,255,0.12)];
+  transition: transform .25s ease, box-shadow .25s ease, border-color .25s ease;
+}
+.card-glass:hover{ transform:translateY(-2px); box-shadow:0 12px 40px rgba(0,0,0,.35); border-color:rgba(255,255,255,.18); }
+
+/* кнопки */
+.btn{ @apply inline-flex items-center justify-center font-medium rounded-2xl px-5 py-3 border transition; }
+.btn-whatsapp{
+  @apply text-[rgb(15,97,48)] bg-[rgba(37,211,102,0.18)] border-[rgba(37,211,102,0.35)];
+  backdrop-filter:blur(8px);
+  box-shadow:0 8px 24px rgba(37,211,102,.22), inset 0 1px 0 rgba(255,255,255,.18);
+}
+.btn-whatsapp:hover{ @apply bg-[rgba(37,211,102,0.28)]; box-shadow:0 10px 28px rgba(37,211,102,.28), inset 0 1px 0 rgba(255,255,255,.22); }
+.btn-whatsapp:focus-visible{ outline:2px solid rgba(37,211,102,.55); outline-offset:2px; box-shadow:0 0 0 6px rgba(37,211,102,.18),0 10px 28px rgba(37,211,102,.28); }
+
+/* утилиты-разделы */
+.section{ @apply container mx-auto px-4 py-12; }
+.section-lg{ @apply container mx-auto px-4 py-16; }
