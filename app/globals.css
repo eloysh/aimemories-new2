@@ -1,37 +1,93 @@
-/* app/globals.css */
+/* app/globals.css — Tailwind v4 */
 @import "tailwindcss";
 @reference "tailwindcss";
 
-/* анимация появления секций */
-/* Добавьте эти стили */
-.reveal {
-  opacity: 1 !important;
-  visibility: visible !important;
+/* БАЗА */
+*,
+*::before,
+*::after { box-sizing: border-box; }
+/* страховка, чтобы блоки не оставались скрытыми */
+.reveal { opacity: 1; transform: none; }
+.reveal.show { opacity: 1; transform: none; }
+
+html, body { height: 100%; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  @apply bg-[#070b16] text-white antialiased;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
-section {
-  display: block;
-  width: 100%;
-}
+::selection { background: rgba(99,102,241,.35); color: #fff; }
 
-/* стеклянная карточка */
+a { @apply text-sky-300 transition; }
+a:hover { @apply text-sky-200; }
+
+/* ПОЯВЛЕНИЕ СЕКЦИЙ */
+.reveal{
+  opacity:0; transform:translateY(16px) scale(.98);
+  transition:opacity .6s ease, transform .6s ease;
+}
+.reveal.show{ opacity:1; transform:none; }
+
+/* КАРТОЧКИ «СТЕКЛО» */
 .card-glass{
   @apply backdrop-blur border rounded-2xl;
   @apply bg-[rgba(255,255,255,0.08)] border-[rgba(255,255,255,0.12)];
   transition: transform .25s ease, box-shadow .25s ease, border-color .25s ease;
 }
-.card-glass:hover{ transform:translateY(-2px); box-shadow:0 12px 40px rgba(0,0,0,.35); border-color:rgba(255,255,255,.18); }
+.card-glass:hover{
+  transform: translateY(-2px);
+  box-shadow: 0 12px 40px rgba(0,0,0,.35);
+  border-color: rgba(255,255,255,.18);
+}
 
-/* кнопки */
+/* КНОПКИ */
 .btn{ @apply inline-flex items-center justify-center font-medium rounded-2xl px-5 py-3 border transition; }
 .btn-whatsapp{
-  @apply text-[rgb(15,97,48)] bg-[rgba(37,211,102,0.18)] border-[rgba(37,211,102,0.35)];
-  backdrop-filter:blur(8px);
-  box-shadow:0 8px 24px rgba(37,211,102,.22), inset 0 1px 0 rgba(255,255,255,.18);
+  @apply text-[rgb(15,97,48)];
+  @apply bg-[rgba(37,211,102,0.18)] border-[rgba(37,211,102,0.35)];
+  backdrop-filter: blur(8px);
+  box-shadow: 0 8px 24px rgba(37,211,102,.22), inset 0 1px 0 rgba(255,255,255,.18);
 }
-.btn-whatsapp:hover{ @apply bg-[rgba(37,211,102,0.28)]; box-shadow:0 10px 28px rgba(37,211,102,.28), inset 0 1px 0 rgba(255,255,255,.22); }
-.btn-whatsapp:focus-visible{ outline:2px solid rgba(37,211,102,.55); outline-offset:2px; box-shadow:0 0 0 6px rgba(37,211,102,.18),0 10px 28px rgba(37,211,102,.28); }
+.btn-whatsapp:hover{
+  @apply bg-[rgba(37,211,102,0.28)];
+  box-shadow: 0 10px 28px rgba(37,211,102,.28), inset 0 1px 0 rgba(255,255,255,.22);
+}
+.btn-whatsapp:focus-visible{
+  outline: 2px solid rgba(37,211,102,.55); outline-offset: 2px;
+  box-shadow: 0 0 0 6px rgba(37,211,102,.18), 0 10px 28px rgba(37,211,102,.28);
+}
 
-/* утилиты-разделы */
-.section{ @apply container mx-auto px-4 py-12; }
+/* ГРАДИЕНТНЫЙ H1 */
+.h1-gradient{
+  background: linear-gradient(180deg,#fff 0%,#c7d2fe 50%,#e9d5ff 100%);
+  -webkit-background-clip:text; background-clip:text; color:transparent;
+  text-shadow: 0 1px 0 rgba(255,255,255,.2);
+}
+
+/* УТИЛИТЫ СЕКЦИЙ */
+.section   { @apply container mx-auto px-4 py-12; }
 .section-lg{ @apply container mx-auto px-4 py-16; }
+
+/* МЕДИА */
+img, video { max-width: 100%; height: auto; }
+
+/* A11Y: меньше анимаций */
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation-duration: .001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: .001ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* Мобильные акценты */
+@media (max-width: 768px) {
+  .card-glass {
+    @apply bg-[rgba(255,255,255,0.10)] border-[rgba(255,255,255,0.14)];
+  }
+}
